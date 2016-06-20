@@ -379,6 +379,7 @@ void Interpret::Parse(char* command)
 			{
 				tempcol = getCol(temp);
 				if (tempcol.type == -1) return;
+				getTableInfo.attribute.push_back(tempcol);
 				if (!getWord(temp, word)) return;
 			};
 			if (!(word == ")"))	return;

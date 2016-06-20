@@ -38,7 +38,7 @@ public:
 	int attriNum;	//the number of attributes in the tables
 	int totalLength;	//total length of one record, should be equal to sum(attributes[i].length)以字节为最小单位
 	vector<Attribute> attribute;
-	Table(){};
+	Table() : blockNum(0), attriNum(0), totalLength(0) {};
 	Table(string tablename) : tableName(tablename),blockNum(0), attriNum(0), totalLength(0)
 	{
 		attribute.clear();
