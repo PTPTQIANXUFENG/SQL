@@ -1,5 +1,5 @@
 #include "API.h"
-
+//#include
 extern CatalogManager Catalog;
 extern BufferManager buf;
 extern Interpret ParseTree;
@@ -26,7 +26,7 @@ void Execute()
 		break;
 	case DRPTAB:
 		record.dropTable(ParseTree.getTableInfo);
-		for (int i = 0; i < ParseTree.getTableInfo.attriNum; i++) {	//°ÑÕâ¸÷±íËùÓÐµÄindex¶¼É¾µô
+		for (int i = 0; i < ParseTree.getTableInfo.attriNum; i++) {	//æŠŠè¿™å„è¡¨æ‰€æœ‰çš„indexéƒ½åˆ æŽ‰
 			indexinfor = Catalog.getIndexInformation(ParseTree.getTableInfo.tableName, i);
 			if (indexinfor.indexName != "") dropIndex(indexinfor);
 		}
@@ -77,7 +77,7 @@ void Execute()
 		tableinfor = ParseTree.getTableInfo;
 		if (ParseTree.condition.size() == 1) {
 			for (int i = 0; i < ParseTree.getTableInfo.attribute.size(); i++) {
-				/*ÐÞ¸Ä*/if ((ParseTree.getTableInfo.attribute[i].isPrimeryKey == true || ParseTree.getTableInfo.attribute[i].isUnique == true) && ParseTree.m_colname == ParseTree.getTableInfo.attribute[i].name) {
+				/*ä¿®æ”¹*/if ((ParseTree.getTableInfo.attribute[i].isPrimeryKey == true || ParseTree.getTableInfo.attribute[i].isUnique == true) && ParseTree.m_colname == ParseTree.getTableInfo.attribute[i].name) {
 					tempPrimaryPosition = i;
 					indexinfor = Catalog.getIndexInformation(tableinfor.tableName, i);
 					break;
@@ -112,7 +112,7 @@ void Execute()
 	case CREIND:
 		tableinfor = ParseTree.getTableInfo;
 		indexinfor = ParseTree.getIndexInfo;
-		if (!tableinfor.attribute[indexinfor.column].isPrimeryKey && !tableinfor.attribute[indexinfor.column].isUnique) {//²»ÊÇprimary key£¬²»¿ÉÒÔ½¨index
+		if (!tableinfor.attribute[indexinfor.column].isPrimeryKey && !tableinfor.attribute[indexinfor.column].isUnique) {//ä¸æ˜¯primary keyï¼Œä¸å¯ä»¥å»ºindex
 			cout << "Column " << tableinfor.attribute[indexinfor.column].name <<"  is not unique."<< endl;
 			break;
 		}
@@ -238,7 +238,7 @@ void ShowResult(Data data, Table tableinfor, vector<Attribute> column){
 		}
 		cout << endl;
 
-		//ÄÚÈÝ
+		//å†…å®¹
 		for(int i = 0; i < data.rows.size(); i++){
 			cout << "| ";
 			for(int j = 0; j < tableinfor.attriNum; j++){
@@ -305,7 +305,7 @@ void ShowResult(Data data, Table tableinfor, vector<Attribute> column){
 		}
 		cout << endl;
 
-		//ÄÚÈÝ
+		//å†…å®¹
 		for(int i = 0; i < data.rows.size(); i++){
 			cout << "| ";
 			for(int j = 0; j < column.size(); j++){
